@@ -1,3 +1,301 @@
-h1 {
-    color: red;
+@CHARSET "UTF-8";
+body
+{background-image: url(tomato.jpg);}
+
+.backInvisibleFillWidth
+{
+    margin-top: 5%;
+    width:	100%;
 }
+
+.backCoveredHouseTwoMainColumns
+{
+    width: 100%;
+    margin:	auto;
+    max-width: 1000px;
+}
+
+.backInvisibleHouseCommoditiesInfo
+{
+    width:	60%;
+}
+
+.backInvisibleHouseCommodityList
+{
+    width:	30%;
+    float:	right;
+}
+
+.backVisibleStandardColor
+{
+    background: linear-gradient(rgba(255, 0, 0, .5), rgba(253, 241, 77, .5));
+}
+
+.backVisibleTextAreaAndAddButt
+{
+    display: inline-block;
+    width:50%;
+    min-width:685px;
+
+    padding: 0px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+}
+
+/*.backTextAreaAndAddButt:hover
+{
+	border: 2px solid #ffffff;
+}*/
+
+.button
+{
+    color: #441a66;
+    display: inline-block;
+    background-color: #c0c0c0;
+    cursor: pointer;
+}
+
+.button:hover
+{
+    /*	display: inline;
+        background-color: #80ffff; */
+}
+
+.addNewProductButt
+{
+    text-align: center;
+    vertical-align: middle;
+    color: #000000;
+    padding:10px;
+    margin:10px;
+    margin-left:0px;
+    width:14%;
+    float:right;
+    border-radius:15px 50px;
+    border: 3px solid #000000;
+    font-weight: bold;
+    font-family: "Comic Sans MS";
+    font-size: 15px;
+    background: linear-gradient(to right, red, yellow);
+}
+
+.addNewProductButt:hover
+{
+    border: 3px solid #ffffff;
+    background: linear-gradient(to right, yellow, red);
+    color: white;
+}
+
+.productNameInput
+{
+    background-color: #dffdfd;
+    text-align: center;
+    vertical-align: middle;
+    padding:10px;
+    margin:10px;
+    margin-right:0px;
+    margin-top:12px;
+    border-radius:15px 50px;
+    border: 2px solid #000000;
+    width:75%;
+}
+
+.productNameInput:hover
+{
+    border: 3px solid #ffffff;
+}
+
+.backProductInfo
+{
+    display: inline-block;
+    width:50%;
+    min-width:685px;
+    border-radius:15px 50px;
+    border: 2px solid #000000;
+}
+
+/*.backProductInfo:hover
+{
+	border: 2px solid #ffffff;
+}*/
+
+.textInProdInfo
+{
+    display: inline-block;
+    min-width: 80px;
+    max-width: 80px;
+    padding: 15px;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 1;
+}
+
+.addProdButt
+{
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius:50%;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #1adb0f;
+    color: #000000;
+}
+
+.addProdButt:hover
+{
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.subtractProdButt
+{
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius:50%;
+    margin-left:20%;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #ff0000;
+    color: #000000;
+}
+
+.subtractProdButt:hover
+{
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.prodQuantityInput
+{
+    background-color:#dffdfd;
+    text-align: center;
+    vertical-align: middle;
+    border-radius:50%;
+    padding:10px;
+    border-radius:15px 50px;
+    border: 2px solid #000000;
+    width:5%;
+}
+
+.prodQuantityInput:hover
+{
+    border: 2px solid #ffffff;
+}
+
+.boughtButt
+{
+    text-align: center;
+    vertical-align: middle;
+    color: #000000;
+    padding:10px;
+    margin:10px;
+    margin-right:0;
+    margin-left:15%;
+    width:14%;
+    border-radius:15px 50px;
+    border: 3px solid #000000;
+    font-weight: bold;
+    font-family: "Comic Sans MS";
+    font-size: 15px;
+    background: linear-gradient(to right, red, yellow);
+}
+
+.boughtButt:hover
+{
+    border: 3px solid #ffffff;
+    background: linear-gradient(to right, yellow, red);
+    color: white;
+}
+
+.deleteButt
+{
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius:50%;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #ff0000;
+    color: #000000;
+}
+
+.deleteButt:hover
+{
+    border: 2px solid #ffffff;
+    color: white;
+}
+
+.toBuyLabel
+{
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    width:25%;
+    min-width:330px;
+    max-width:330px;
+    padding: 0px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display:inline-block;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.toBuyProducts
+{
+    display: inline-block;
+    min-width:330px;
+    max-width:330px;
+    padding: 0px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+}
+
+.good
+{
+    display:inline-block;
+    padding:7px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+    margin: 5px;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    background-color: #dffdfd;
+}
+
+.numberOfGoods
+{
+    display:inline-block;
+    border: 1px dotted #000000;
+    margin-left: 5px;
+    border-radius:15px 45px;
+    padding: 7px;
+}
+
+.alreadyBoughtProd
+{
+    display: inline-block;
+    min-width:330px;
+    max-width:330px;
+    padding: 0px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+    min-height: 100px;
+}
+
+

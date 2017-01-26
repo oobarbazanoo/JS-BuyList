@@ -8,6 +8,15 @@ body
     width:	100%;
 }
 
+.fixBottom::after
+{
+    visibility:	hidden;
+    display:	block;
+    content:	"";
+    height:	0;
+    clear:	both;
+}
+
 .backCoveredHouseTwoMainColumns
 {
     width: 100%;
@@ -87,6 +96,13 @@ body
     color: white;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .productNameInput
 {
     background-color: #dffdfd;
@@ -131,6 +147,7 @@ body
     font-weight: bold;
     font-size: 20px;
     opacity: 1;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
 .addProdButt
@@ -257,6 +274,7 @@ body
     font-family: "Comic Sans MS";
     font-weight: bold;
     font-size: 30px;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
 .toBuyProducts
@@ -301,4 +319,33 @@ body
     min-height: 100px;
 }
 
+.sticker
+{
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+    border-radius:15px 45px;
+    position: fixed;
+    bottom: -100px;
+    background: #9333bf;
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+    border: 2px solid #000000;
+    text-align: center;
+    vertical-align: middle;
+    color: #ffffff;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    background: linear-gradient( rgba(133, 9, 183, .5), rgba(147, 51, 191, .5));
+}
 
+.sticker:hover
+{
+    bottom: 10px;
+}
+
+.textInsideSticker
+{
+    font-weight: bold;
+    font-size: 20px;
+}

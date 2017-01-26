@@ -96,13 +96,6 @@ body
     color: white;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button
-{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 .productNameInput
 {
     background-color: #dffdfd;
@@ -130,6 +123,12 @@ input[type="number"]::-webkit-inner-spin-button
     min-width:685px;
     border-radius:15px 50px;
     border: 2px solid #000000;
+}
+
+.backProductInfo:hover
+{
+    position: relative;
+    bottom: 10px;
 }
 
 /*.backProductInfo:hover
@@ -193,22 +192,22 @@ input[type="number"]::-webkit-inner-spin-button
     color: #ffffff;
 }
 
-.prodQuantityInput
+.prodQuantityInfo
 {
+    display:inline-block;
     background-color:#dffdfd;
     text-align: center;
     vertical-align: middle;
     border-radius:50%;
-    padding:10px;
+    padding:5px;
+    padding-right: 10px;
+    padding-left: 10px;
     border-radius:15px 50px;
     border: 2px solid #000000;
     width:5%;
-}
-
-.prodQuantityInput:focus
-{
-    border: 2px solid #ffffff;
-    outline: none;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .boughtButt
@@ -337,15 +336,56 @@ input[type="number"]::-webkit-inner-spin-button
     color: #ffffff;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     background: linear-gradient( rgba(133, 9, 183, .5), rgba(147, 51, 191, .5));
+    transition:	all	2s	cubic-bezier(.17,.67,.04,1);
 }
 
 .sticker:hover
 {
     bottom: 10px;
+    background: linear-gradient( rgba(255, 255, 0, 0.5), rgb(255, 138, 36));
+    transform: rotate(360deg);
 }
 
-.textInsideSticker
+.textInsideStickerBottom
 {
+    display: inline-block;
     font-weight: bold;
     font-size: 20px;
+    margin-top: 40px;
 }
+
+@media	print
+{
+    .sticker
+    {
+        background: #ffffff;
+        border: 3px solid #9333bf;
+    }
+
+    .textInsideStickerBottom
+    {
+        display: inline-block;
+        margin-top: 0px;
+        margin-bottom: 50px;
+        color: #000000;
+    }
+
+    .textInsideStickerTop
+    {
+        content:"";
+        height:	0;
+        visibility: hidden;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

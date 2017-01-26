@@ -12,7 +12,8 @@ body
 {
     width: 100%;
     margin:	auto;
-    max-width: 1000px;
+    max-width: 1100px;
+    min-width: 988px;
 }
 
 .backInvisibleHouseCommoditiesInfo
@@ -100,9 +101,10 @@ body
     width:75%;
 }
 
-.productNameInput:hover
+.productNameInput:focus
 {
     border: 3px solid #ffffff;
+    outline: none;
 }
 
 .backProductInfo
@@ -186,9 +188,10 @@ body
     width:5%;
 }
 
-.prodQuantityInput:hover
+.prodQuantityInput:focus
 {
     border: 2px solid #ffffff;
+    outline: none;
 }
 
 .boughtButt

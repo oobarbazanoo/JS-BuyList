@@ -11,8 +11,8 @@ body
 .fixBottom::after
 {
     visibility:	hidden;
-    display:	block;
-    content:	"";
+    display: block;
+    content: "";
     height:	0;
     clear:	both;
 }
@@ -22,12 +22,13 @@ body
     width: 100%;
     margin:	auto;
     max-width: 1100px;
-    min-width: 988px;
+    /*min-width: 988px;*/
 }
 
 .backInvisibleHouseCommoditiesInfo
 {
     width:	60%;
+    display: inline-block;
 }
 
 .backInvisibleHouseCommodityList
@@ -393,14 +394,18 @@ body
     {display: none;}
 }
 
+@media only screen and (max-width: 1000px)
+{
+    .backInvisibleHouseCommoditiesInfo
+    {
+        display: block;
+    }
 
-
-
-
-
-
-
-
-
-
-
+    .backInvisibleHouseCommodityList
+    {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        width:	60%;
+    }
+}

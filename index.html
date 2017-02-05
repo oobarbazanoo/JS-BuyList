@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>Commodity shop</title>
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
     <div class="backInvisibleFillWidth fixBottom">
@@ -12,67 +12,73 @@
             <div class="backInvisibleHouseCommoditiesInfo">
                 <div class="backVisibleTextAreaAndAddButt backVisibleStandardColor">
                     <div class="button addNewProductButt" data-tooltip="Create new">Add product</div>
-                    <input class="productNameInput" type="text" placeholder="Name of the commodity" maxlength="15">
+                    <input id="prodInput" class="productNameInput" type="text" placeholder="Name of the commodity" maxlength="9">
+                </div>
+                <div class="product">
+                    <div class="backProductInfo backVisibleStandardColor fixBottom">
+
+                        <div class="right">
+                            <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
+                            <div class="button deleteButt" data-tooltip="Cancel">×</div>
+                            <div class="button notBoughtButt" data-tooltip="Change mind">Not bought</div>
+                        </div>
+
+                        <div class="left showInput">
+                            <span class="textInProdInfo">Tomatoes</span>
+                            <input class="changeNameInput" type="text" placeholder="Name of the commodity" maxlength="9">
+                        </div>
+
+                        <div class="fluid">
+                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <span class="prodQuantityInfo">1</span>
+                            <div class="button addProdButt" data-tooltip="Add">+</div>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="backProductInfo backVisibleStandardColor fixBottom">
+                <div class="product">
+                    <div class="backProductInfo backVisibleStandardColor fixBottom">
 
-                    <div class="right">
-                        <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
-                        <div class="button deleteButt" data-tooltip="Cancel">×</div>
+                        <div class="right">
+                            <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
+                            <div class="button deleteButt" data-tooltip="Cancel">×</div>
+                            <div class="button notBoughtButt" data-tooltip="Change mind">Not bought</div>
+                        </div>
+
+                        <div class="left">
+                            <span class="textInProdInfo">Cookies</span>
+                        </div>
+
+                        <div class="fluid">
+                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <span class="prodQuantityInfo">1</span>
+                            <div class="button addProdButt" data-tooltip="Add">+</div>
+                        </div>
+
                     </div>
-
-                    <div class="left">
-                        <span class="textInProdInfo">Tomatoes</span>
-                    </div>
-
-                    <div class="fluid">
-                        <div class="button subtractProdButt" data-tooltip="Take away">-</div>
-                        <span class="prodQuantityInfo">1</span>
-                        <!--<input  type="number" placeholder="1" maxlength="4" min="1" max="999">-->
-                        <div class="button addProdButt" data-tooltip="Add">+</div>
-                    </div>
-
                 </div>
 
-                <div class="backProductInfo backVisibleStandardColor fixBottom">
+                <div class="product">
+                    <div class="backProductInfo backVisibleStandardColor fixBottom">
 
-                    <div class="right">
-                        <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
-                        <div class="button deleteButt" data-tooltip="Cancel">×</div>
+                        <div class="right">
+                            <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
+                            <div class="button deleteButt" data-tooltip="Cancel">×</div>
+                            <div class="button notBoughtButt" data-tooltip="Change mind">Not bought</div>
+                        </div>
+
+                        <div class="left">
+                            <span class="textInProdInfo">Cheese</span>
+                        </div>
+
+                        <div class="fluid">
+                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <span class="prodQuantityInfo">1</span>
+                            <div class="button addProdButt" data-tooltip="Add">+</div>
+                        </div>
+
                     </div>
-
-                    <div class="left">
-                        <span class="textInProdInfo">Cookies</span>
-                    </div>
-
-                    <div class="fluid">
-                        <div class="button subtractProdButt" data-tooltip="Take away">-</div>
-                        <span class="prodQuantityInfo">1</span>
-                        <!--<input  type="number" placeholder="1" maxlength="4" min="1" max="999">-->
-                        <div class="button addProdButt" data-tooltip="Add">+</div>
-                    </div>
-
-                </div>
-
-                <div class="backProductInfo backVisibleStandardColor fixBottom">
-
-                    <div class="right">
-                        <div class="button boughtButt" data-tooltip="Move to already bought">Bought</div>
-                        <div class="button deleteButt" data-tooltip="Cancel">×</div>
-                    </div>
-
-                    <div class="left">
-                        <span class="textInProdInfo">Cheese</span>
-                    </div>
-
-                    <div class="fluid">
-                        <div class="button subtractProdButt" data-tooltip="Take away">-</div>
-                        <span class="prodQuantityInfo">1</span>
-                        <!--<input  type="number" placeholder="1" maxlength="4" min="1" max="999">-->
-                        <div class="button addProdButt" data-tooltip="Add">+</div>
-                    </div>
-
                 </div>
             </div>
             <!--right column-->
@@ -99,5 +105,8 @@
         <span class="textInsideStickerBottom">Created by<br/>
         Trofimov Yaroslav</span>
     </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/scripter.js"></script>
 </body>
 </html>

@@ -9,11 +9,12 @@ $(function()
         $addNewProductButt = $(".addNewProductButt"),
         $backInvisibleHouseCommoditiesInfo = $(".backInvisibleHouseCommoditiesInfo"),
         $productNameInput = $("#prodInput"),
-        $body = $("body"),
+        $backPicture = $("#backPicture"),
         htmlForProductInTheRightColumn = $(".good").html(),
         $toBuyProducts = $(".toBuyProducts"),
         $alreadBoughtProd = $(".alreadyBoughtProd");
 
+    var ROTATE = 1, RESCALE = 2, ROTATEx = 1, ROTATEy = 2, ROTATEz = 3;
     $.fn.pressEnter = function(fn) {
 
         return this.each(function() {
@@ -221,14 +222,45 @@ $(function()
     function getRandomInt(min, max)
     {return Math.floor(Math.random()*(max-min+1))+min;}
 
+    function getRandomDouble(min, max)
+    {return Math.random() * (max - min) + min;}
+
     function nextBackground()
     {
-        var url = "url('images/" + getRandomInt(1, 33) + ".jpg')";
+        var url = "url('images/" + getRandomInt(1, 43) + ".jpg')";
 
-        $body.css("background-image", url);
+        $backPicture.css("background-image", url);
         setTimeout(nextBackground, 7000);
     }
+
+    function nextEffect()
+    {
+        switch(getRandomInt(1, 2))
+        {
+            case ROTATE:
+                var degreeToRotate = getRandomInt(360, 1000);
+                switch(getRandomInt(1, 3))
+                {
+                    case ROTATEx:
+                        $backPicture.css("transform", "rotateX("+degreeToRotate+"deg)");
+                        break;
+                    case ROTATEy:
+                        $backPicture.css("transform", "rotateY("+degreeToRotate+"deg)");
+                        break;
+                    case ROTATEz:
+                        $backPicture.css("transform", "rotateZ("+degreeToRotate+"deg)");
+                        break;
+                }
+                break;
+            case RESCALE:
+                var rescaleFactor = getRandomDouble(0, 3);
+                $backPicture.css("transform", "scale("+rescaleFactor+")");
+                break;
+        }
+        setTimeout(nextEffect, 7000);
+    }
     setTimeout(nextBackground, 7000);
+    setTimeout(nextEffect, 7000);
     //endregion
 
     //region play music in background
@@ -241,7 +273,7 @@ $(function()
     function playSong()
     {
         song = new Audio();
-        song.src = "music/" + getRandomInt(1, 7) + ".mp3";
+        song.src = "music/" + getRandomInt(1, 13) + ".mp3";
         song.play();
         song.onended = playSong;
     }

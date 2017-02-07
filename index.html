@@ -23,13 +23,14 @@
                             <div class="button notBoughtButt" data-tooltip="Change mind">Not bought</div>
                         </div>
 
-                        <div class="left showInput">
+                        <div class="left">
                             <span class="textInProdInfo">Tomatoes</span>
-                            <input class="changeNameInput" type="text" placeholder="Name of the commodity" maxlength="9">
+                            <input class="changeNameInput" type="text" maxlength="9">
                         </div>
 
                         <div class="fluid">
-                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <!--button subtractProdButt subtractProdButtInactive-->
+                            <div class="subtractProdButtInactive" data-tooltip="Take away">-</div>
                             <span class="prodQuantityInfo">1</span>
                             <div class="button addProdButt" data-tooltip="Add">+</div>
                         </div>
@@ -48,10 +49,11 @@
 
                         <div class="left">
                             <span class="textInProdInfo">Cookies</span>
+                            <input class="changeNameInput" type="text" maxlength="9">
                         </div>
 
                         <div class="fluid">
-                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <div class="subtractProdButtInactive" data-tooltip="Take away">-</div>
                             <span class="prodQuantityInfo">1</span>
                             <div class="button addProdButt" data-tooltip="Add">+</div>
                         </div>
@@ -70,10 +72,11 @@
 
                         <div class="left">
                             <span class="textInProdInfo">Cheese</span>
+                            <input class="changeNameInput" type="text" maxlength="9">
                         </div>
 
                         <div class="fluid">
-                            <div class="button subtractProdButt" data-tooltip="Take away">-</div>
+                            <div class="subtractProdButtInactive" data-tooltip="Take away">-</div>
                             <span class="prodQuantityInfo">1</span>
                             <div class="button addProdButt" data-tooltip="Add">+</div>
                         </div>
@@ -86,9 +89,18 @@
                 <div class="toBuyLabel backVisibleStandardColor">To buy</div>
 
                 <div class="toBuyProducts backVisibleStandardColor">
-                    <div class="good">Tomatoes<span class="numberOfGoods backVisibleStandardColor">1</span></div>
-                    <div class="good">Cookies <span class="numberOfGoods backVisibleStandardColor">1</span></div>
-                    <div class="good">Cheese  <span class="numberOfGoods backVisibleStandardColor">1</span></div>
+                    <div class="good">
+                        <div class = "nameOnRight">Tomatoes</div>
+                        <span class="numberOfGoods backVisibleStandardColor">1</span>
+                    </div>
+                    <div class="good">
+                        <div class = "nameOnRight">Cookies</div>
+                        <span class="numberOfGoods backVisibleStandardColor">1</span>
+                    </div>
+                    <div class="good">
+                        <div class = "nameOnRight">Cheese</div>
+                        <span class="numberOfGoods backVisibleStandardColor">1</span>
+                    </div>
                 </div>
 
                 <div class="toBuyLabel backVisibleStandardColor">Already bought</div>
@@ -104,6 +116,11 @@
         <span class="textInsideStickerTop">Buy List</span>
         <span class="textInsideStickerBottom">Created by<br/>
         Trofimov Yaroslav</span>
+    </div>
+
+    <div class="musicPlayer">
+        <img src="images/stop.png" width="100px" class="button stopMusicButt" data-tooltip="Stop">
+        <img src="images/play.png" width="100px" class="playMusicButt button" data-tooltip="Play">
     </div>
 
     <script src="js/jquery.js"></script>

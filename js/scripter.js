@@ -4,12 +4,28 @@
 $(function()
 {
 
-    //region often used variables
+    //region often used variables and a few tweaks
     var htmlForProduct = $(".product").html(),
         $addNewProductButt = $(".addNewProductButt"),
         $backInvisibleHouseCommoditiesInfo = $(".backInvisibleHouseCommoditiesInfo"),
         $productNameInput = $("#prodInput"),
-        $body = $("body");
+        $body = $("body"),
+        htmlForProductInTheRightColumn = $(".good").html(),
+        $toBuyProducts = $(".toBuyProducts"),
+        $alreadBoughtProd = $(".alreadyBoughtProd");
+
+    $.fn.pressEnter = function(fn) {
+
+        return this.each(function() {
+            $(this).bind('enterPress', fn);
+            $(this).keyup(function(e){
+                if(e.keyCode == 13)
+                {
+                    $(this).trigger("enterPress");
+                }
+            })
+        });
+    };
     //endregion
 
     //region change name of the product
@@ -17,13 +33,36 @@ $(function()
      натискає на назву товара, вона має замінятися полем вводу в якому стоїть активний курсор. Після того,
      як користувач знімає фокус з поля, поле редагування має зникнути (input), а замість нього має з’явитися відредагована назва.
      */
-    // function changeName()
-    // {
-    //     var $right = $(this).parent();
-    //     $right.addClass("showInput");           STOPPED HEREEEE!!!!!
-    // }
-    // $(".textInProdInfo").click(changeName);
 
+    function changeName()
+    {
+        var $left = $(this).parent();
+        if($left.parent().parent().hasClass("boughtButtClicked"))
+        {return;}
+        $left.find(".changeNameInput").val($left.find(".textInProdInfo").text());
+        $left.addClass("showInput");
+        $left.find(".changeNameInput").focus();
+    }
+    $(".textInProdInfo").click(changeName);
+
+    function focusOutFromChangeNameInput()
+    {
+        var $left = $(this).parent();
+        $left.find(".textInProdInfo").text($left.find(".changeNameInput").val());
+        $left.removeClass("showInput");
+    }
+    $(".changeNameInput").focusout(focusOutFromChangeNameInput);
+    $(".changeNameInput").pressEnter(focusOutFromChangeNameInput);
+
+    function changeNameDynamically()
+    {
+        var $mainDiv = $(this).parent().parent().parent(),
+            serialNumberChoosen = $mainDiv.index(),
+            $divFromLeftColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+        $divFromLeftColumnToChange.find(".nameOnRight").text($(this).val());
+
+    }
+    $(".changeNameInput").keyup(changeNameDynamically);
     //endregion
 
     //region bought and not bought butts reaction
@@ -31,19 +70,50 @@ $(function()
      Після натискання на неї товар відмічається як куплений: Назва товару стає перекресленою, зникають кнопки
      редагування кількості та кнопка видалення. Якщо користувач натисне кнопку "Зробити не купленим" товар має
      повернутися в попередній стан.*/
+    var counterOfAlreadyBoughtProducts = 0;
     function boughtButtClicked()
     {
         var $divParent = $(this).parent().parent().parent();
         $divParent.fadeOut(1000, function(){$divParent.addClass("boughtButtClicked");});
         $divParent.fadeIn(2000);
+
+        var serialNumberChoosen = $divParent.index(),
+            $divFromRightColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+
+        $divFromRightColumnToChange.hide(1000, function(){});
+
+        var $divForAlreadyBoughGood = $("<div>", {"class": "boughtGood"}),
+            $divWithName = $("<div>", {"class": "nameOnRight strikeout"}),
+            $spanWithNumberOfGoods =  $("<span>", {"class": "numberOfGoods backVisibleStandardColor strikeout"});
+
+        $divWithName.text($divFromRightColumnToChange.find(".nameOnRight").text());
+        $spanWithNumberOfGoods.text($divFromRightColumnToChange.find(".numberOfGoods").text());
+        $divForAlreadyBoughGood.append($divWithName);
+        $divForAlreadyBoughGood.append($spanWithNumberOfGoods);
+        $divForAlreadyBoughGood.attr("id", "" + counterOfAlreadyBoughtProducts + "left");
+        $divParent.attr("id", "" + counterOfAlreadyBoughtProducts);
+        counterOfAlreadyBoughtProducts++;
+        $alreadBoughtProd.append($divForAlreadyBoughGood);
     }
     $(".boughtButt").click(boughtButtClicked);
 
     function notBoughtButtClicked()
     {
         var $divParent = $(this).parent().parent().parent();
+        $("#"+$divParent.attr("id")+"left").hide(1000, function(){$("#"+$divParent.attr("id")+"left").remove();});
+
+
         $divParent.fadeOut(1000, function(){$divParent.removeClass("boughtButtClicked");});
         $divParent.fadeIn(2000);
+
+        var serialNumberChoosen = $divParent.index(),
+            $divFromRightColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+
+        counterOfAlreadyBoughtProducts--;
+        $("#"+$divParent.attr("id")+"left").removeAttr("id");
+        $divParent.removeAttr("id");
+
+        $divFromRightColumnToChange.fadeIn(1000, function(){});
     }
     $(".notBoughtButt").click(notBoughtButtClicked);
 
@@ -58,6 +128,10 @@ $(function()
     function deleteButtClicked()
     {
         var $divParent = $(this).parent().parent().parent();
+
+        var serialNumberChoosen = $divParent.index(),
+            $divFromRightColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+        $divFromRightColumnToChange.hide(1000, function(){$divFromRightColumnToChange.remove();});
         $divParent.hide(1000, function(){$divParent.remove();});
     }
     $(".deleteButt").click(deleteButtClicked);
@@ -70,41 +144,60 @@ $(function()
     //additionally: user can`t enter only spaces, will be notified about this and focus will be returned into input, input will be cleared
     function addProduct()
     {
-            //take name in input, take inwards, trim name, write name into inwards
-            var nameOfTheCommodity = $productNameInput.val(),
-                $prodInwards = $(htmlForProduct);
-            nameOfTheCommodity = $.trim(nameOfTheCommodity);
-            $prodInwards.find(".textInProdInfo").text(nameOfTheCommodity);
+        //take name in input, take inwards, trim name, write name into inwards
+        var nameOfTheCommodity = $productNameInput.val(),
+            $prodInwards = $(htmlForProduct),
+            $inwardsForRight = $(htmlForProductInTheRightColumn);
+        nameOfTheCommodity = $.trim(nameOfTheCommodity);
+        $prodInwards.find(".textInProdInfo").text(nameOfTheCommodity);
 
-            //check whether name is not blank
-            if(nameOfTheCommodity.length < 1)
-            {
-                alert("The name is blank!");
-                $productNameInput.val("");
-                $productNameInput.focus();
-                return;
-            }
-
-            //create full product div
-            var $productDiv = $("<div/>");
-            $productDiv.addClass("product");
-            $productDiv.append($prodInwards);
-
-            //add div to the scene
-            $backInvisibleHouseCommoditiesInfo.append($productDiv);
-
-            //set action listener for newly created cancel button
-            $productDiv.find(".deleteButt").click(deleteButtClicked);
-
-            //set action listener for newly created bought button
-            $productDiv.find(".boughtButt").click(boughtButtClicked);
-
-            //set action listener for newly created not bought button
-            $productDiv.find(".notBoughtButt").click(notBoughtButtClicked);
-
-            //clear input area and move focus back
+        //check whether name is not blank
+        if(nameOfTheCommodity.length < 1)
+        {
+            alert("The name is blank!");
             $productNameInput.val("");
             $productNameInput.focus();
+            return;
+        }
+
+        //create full product div for left column
+        var $productDiv = $("<div/>");
+        $productDiv.addClass("product");
+        $productDiv.append($prodInwards);
+
+        //create full product div for left column
+        var $productDivRight = $("<div/>");
+        $productDivRight.addClass("good");
+        $productDivRight.append($inwardsForRight);
+        $productDivRight.find(".nameOnRight").text(nameOfTheCommodity);
+
+        //add div to the scene
+        $backInvisibleHouseCommoditiesInfo.append($productDiv);
+
+        //add left div to the scene
+        $toBuyProducts.append($productDivRight);
+
+        //set action listener for newly created cancel button
+        $productDiv.find(".deleteButt").click(deleteButtClicked);
+
+        //set action listener for newly created bought button
+        $productDiv.find(".boughtButt").click(boughtButtClicked);
+
+        //set action listener for newly created not bought button
+        $productDiv.find(".notBoughtButt").click(notBoughtButtClicked);
+
+        //set action listener for newly created name and change name input
+        $productDiv.find(".textInProdInfo").click(changeName);
+        $productDiv.find(".changeNameInput").focusout(focusOutFromChangeNameInput);
+        $productDiv.find(".changeNameInput").pressEnter(focusOutFromChangeNameInput);
+        $productDiv.find(".changeNameInput").keyup(changeNameDynamically);
+
+        //set action listener for add, subtract buttons
+        $productDiv.find(".addProdButt").click(addButtonClicked);
+
+        //clear input area and move focus back
+        $productNameInput.val("");
+        $productNameInput.focus();
     }
 
     function mouseDownAddNewProductButt()
@@ -117,18 +210,6 @@ $(function()
     $addNewProductButt.mousedown(mouseDownAddNewProductButt);
 
     //enter reaction
-    $.fn.pressEnter = function(fn) {
-
-        return this.each(function() {
-            $(this).bind('enterPress', fn);
-            $(this).keyup(function(e){
-                if(e.keyCode == 13)
-                {
-                    $(this).trigger("enterPress");
-                }
-            })
-        });
-    };
     $productNameInput.pressEnter(addProduct);
 
     /* 1. Додавання товару. Користувач має мати можливість ввести назву товара в поле вводу та натиснути кнопку
@@ -143,10 +224,6 @@ $(function()
     function nextBackground()
     {
         var url = "url('images/" + getRandomInt(1, 33) + ".jpg')";
-        // $body.fadeOut(2000, function ()
-        // {
-        //     $body.css("background-image", url).fadeIn(2000);
-        // });
 
         $body.css("background-image", url);
         setTimeout(nextBackground, 7000);
@@ -155,6 +232,7 @@ $(function()
     //endregion
 
     //region play music in background
+    var song;
     window.onload = function()
     {
         playSong();
@@ -162,11 +240,77 @@ $(function()
 
     function playSong()
     {
-        var song = new Audio();
-        song.src = "music/" + getRandomInt(1, 2) + ".mp3";
+        song = new Audio();
+        song.src = "music/" + getRandomInt(1, 7) + ".mp3";
         song.play();
         song.onended = playSong;
     }
+
+    $(".stopMusicButt").click(function()
+    {
+        song.pause();
+        $(".stopMusicButt").css("display", "none");
+        $(".playMusicButt").css("display", "inline-block");
+    });
+
+    $(".playMusicButt").click(function()
+    {
+        song.play();
+        $(".playMusicButt").css("display", "none");
+        $(".stopMusicButt").css("display", "inline-block");
+    });
+    // //endregion
+
+    //region subtract add buttons tweaks
+    /*6. Редагування кількості товарів. В будь-якого не купленого товару можна редагувати кількість за
+    допомогою кнопок + та -. Якщо кількість товарів 1, то кнопка - має бути не активною. Новий товар
+    має створюватися з кількістю 1.*/
+    function subtractButtonClicked()
+    {
+        var $fluid = $(this).parent(),
+            newQuantity = parseInt($fluid.find(".prodQuantityInfo").text()) - 1;
+        $fluid.find(".prodQuantityInfo").text(newQuantity);
+
+        var $mainDiv = $fluid.parent().parent(),
+            serialNumberChoosen = $mainDiv.index(),
+            $divFromRightColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+        $divFromRightColumnToChange.find(".numberOfGoods").text(newQuantity);
+
+        if(newQuantity == 1)
+        {
+            var $subtractButton = $fluid.find(".subtractProdButt");
+            $subtractButton.removeClass("button subtractProdButt").addClass("subtractProdButtInactive");
+            $subtractButton.unbind('click');
+        }
+    }
+
+    function addButtonClicked()
+    {
+        var $fluid = $(this).parent(),
+            newQuantity = parseInt($fluid.find(".prodQuantityInfo").text()) + 1;
+        $fluid.find(".prodQuantityInfo").text(newQuantity);
+
+        var $mainDiv = $fluid.parent().parent(),
+            serialNumberChoosen = $mainDiv.index(),
+            $divFromRightColumnToChange = $(".toBuyProducts .good:nth-child(" + serialNumberChoosen + ")");
+        $divFromRightColumnToChange.find(".numberOfGoods").text(newQuantity);
+
+
+        if(newQuantity == 2)
+        {
+            var $subtractButton = $fluid.find(".subtractProdButtInactive");
+            $subtractButton.removeClass("subtractProdButtInactive").addClass("button subtractProdButt");
+            $subtractButton.unbind('click');
+            $subtractButton.click(subtractButtonClicked);
+        }
+    }
+    $(".addProdButt").click(addButtonClicked);
+    //endregion
+
+    //region the hardest part
+    /*7. Статистика в правій панелі. При зміні, назви, кількості, видаленні, зміни статусу куплено/не-куплено має
+    оновлюватися статистика. В першій секції мають виводитися товар+кількість тих товарів, які ще необхідно купити.
+    В другій секції мають виводитися товар+кількість тих які вже були куплені.*/
     //endregion
 
 });

@@ -96,7 +96,6 @@ body
     padding-top: 0;
     padding-bottom: 0;
 
-
     background: linear-gradient( rgba(133, 9, 183, .8), rgba(147, 51, 191, .8));
     transition:all 1s linear;
 }
@@ -237,6 +236,26 @@ body
     font-size: 30px;
     background-color: #ff0000;
     color: #000000;
+}
+
+.subtractProdButtInactive
+{
+    background-color: #9333bf;
+    color: #9333bf;
+
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius:50%;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    font-size: 30px;
+
+    cursor:not-allowed;
+    position: relative;
+    display:inline-block;
 }
 
 .right
@@ -381,11 +400,32 @@ body
     text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
+.musicPlayer
+{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.stopMusicButt
+{
+    border-radius: 50%;
+}
+
+.playMusicButt
+{
+    display: none;
+    border-radius: 50%;
+}
+
 .toBuyProducts
 {
     display: inline-block;
     min-width:330px;
     max-width:330px;
+    min-height: 100px;
     padding: 0px;
     border-radius:15px 45px;
     border: 2px solid #000000;
@@ -401,15 +441,58 @@ body
     font-family: "Comic Sans MS";
     font-weight: bold;
     background-color: #dffdfd;
+    overflow: auto;
+}
+
+.strikeout
+{
+    position: relative;
+}
+.strikeout::after
+{
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 0, 0, 1), rgba(0, 255, 0, 1), rgba(0, 0, 255, 1), rgba(255, 255, 255, 0));
+    content: "";
+    height: 0.125em;
+    left: 0;
+    margin-top: calc(0.125em / 2 * -1);
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.boughtGood
+{
+    display:inline-block;
+    padding:7px;
+    border-radius:15px 45px;
+    border: 2px solid #000000;
+    margin: 5px;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+    background-color: #dffdfd;
+    overflow: auto;
+    text-decoration: line-through;
+}
+
+.nameOnRight
+{
+    display: inline-block;
+    margin: 0;
+    text-decoration: inherit;
+    float:left;
 }
 
 .numberOfGoods
 {
-    display:inline-block;
     border: 1px dotted #000000;
+    margin: 0;
+    margin-right: 5px;
     margin-left: 5px;
     border-radius:15px 45px;
-    padding: 7px;
+    padding: 2px;
+    text-decoration: inherit;
+    display:inline-block;
+    float:right;
 }
 
 .alreadyBoughtProd
@@ -566,6 +649,11 @@ body
     background: linear-gradient(rgba(133, 9, 183, .7), rgba(12, 140, 191, .7));
 }
 
+.boughtButtClicked .subtractProdButtInactive
+{
+    display: none;
+}
+
 .left .changeNameInput
 {
     display: none;
@@ -575,7 +663,23 @@ body
 {
     display: block;
     widht: 100px;
+    background-color: #dffdfd;
+    text-align: center;
+    vertical-align: middle;
+    padding:10px;
+    margin:10px;
+    margin-left:5px;
+    border-radius:15px 50px;
+    border: 2px solid #000000;
+    width:80%;
 }
+
+.showInput .changeNameInput:focus
+{
+    border: 3px solid #ffffff;
+    outline: none;
+}
+
 
 .showInput .textInProdInfo
 {
